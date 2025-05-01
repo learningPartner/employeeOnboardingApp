@@ -1,0 +1,9 @@
+<p>Welcome : {{userService.loggedUser?.fullName}} </p>
+
+<div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" name="email"  class="form-control" id="email" placeholder="Enter email" required>
+    <span class="text-danger">
+        {{'MOBILE_MIN_LENGTH' | readConst}}
+    </span>
+  </div>
