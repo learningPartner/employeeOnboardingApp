@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   }
   logOff() {
     localStorage.removeItem(Constant.LOCAL_STORAGE_KEY)
+    this.userServ.loggedUser =  undefined ;
     this.router.navigateByUrl("/login");
   }
 

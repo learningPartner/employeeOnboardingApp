@@ -9,10 +9,14 @@ import { Constant } from '../constant/Constant';
 })
 export class UserService {
 
-  loggedUser!: IUser;
+  loggedUser!: any;
   
   constructor(private http: HttpClient) {
     debugger; 
+    this.setLoggedUser();
+  }
+
+  setLoggedUser() {
     const loggedUser = localStorage.getItem(Constant.LOCAL_STORAGE_KEY);
     if (loggedUser != null) {
       this.loggedUser = JSON.parse(loggedUser)

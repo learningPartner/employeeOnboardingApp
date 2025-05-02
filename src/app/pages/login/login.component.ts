@@ -25,6 +25,7 @@ export class LoginComponent {
     this.userService.loginUser(this.loginObj).subscribe((result:IUser)=>{
       debugger;
       localStorage.setItem(Constant.LOCAL_STORAGE_KEY,JSON.stringify(result))
+      this.userService.setLoggedUser();
       ///alert("Login Success")
       this.router.navigateByUrl("/dashboard")
     },error=>{
