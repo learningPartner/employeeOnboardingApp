@@ -29,4 +29,9 @@ export class UserService {
     debugger;
     return this.http.post<IUser>(`${this.apiUrl}${APIMethodConstant.EMPLOYEE.LOGIN}`, loginObj);
   }
+
+  loginJwtUser(loginObj: any): Observable<IUser> {
+    debugger;
+    return this.http.post<IUser>(`https://api.freeprojectapi.com/api/UserApp/login`, loginObj);
+  }
 }

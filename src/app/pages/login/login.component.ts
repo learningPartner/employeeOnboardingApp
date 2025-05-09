@@ -22,8 +22,13 @@ export class LoginComponent {
 
   onLogin() {
     debugger;
-    this.userService.loginUser(this.loginObj).subscribe((result:IUser)=>{
+    const login = {
+      "emailId": "test445@gmial.com",
+      "password": "445566"
+    }
+    this.userService.loginJwtUser(login).subscribe((result:any)=>{
       debugger;
+      localStorage.setItem('token',result.data.token)
       localStorage.setItem(Constant.LOCAL_STORAGE_KEY,JSON.stringify(result))
       this.userService.setLoggedUser();
       ///alert("Login Success")
