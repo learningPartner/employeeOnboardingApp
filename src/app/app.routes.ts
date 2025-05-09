@@ -4,6 +4,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
 import { authGuard } from './core/guard/auth.guard';
+import { NewEmployeeComponent } from './pages/new-employee/new-employee.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
             {
                 path:'employee-list',
                 component:EmployeeListComponent
+            },
+            {
+                path:'new-employee',
+                component: NewEmployeeComponent
             }
         ]
     }

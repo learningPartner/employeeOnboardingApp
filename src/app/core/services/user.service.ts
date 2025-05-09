@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser, LoginModel } from '../models/user.model';
 import { Observable } from 'rxjs';
-import { Constant } from '../constant/Constant';
+import { APIMethodConstant, Constant } from '../constant/Constant';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Constant } from '../constant/Constant';
 export class UserService {
 
   loggedUser!: any;
+  apiUrl: string = environment.API_URL;
   
   constructor(private http: HttpClient) {
     debugger; 
@@ -25,6 +27,6 @@ export class UserService {
 
   loginUser(loginObj: LoginModel): Observable<IUser> {
     debugger;
-    return this.http.post<IUser>("https://motopartz.gerasim.in/api/Employee/login", loginObj);
+    return this.http.post<IUser>(`${this.apiUrl}${APIMethodConstant.EMPLOYEE.LOGIN}`, loginObj);
   }
 }

@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { IUser } from '../../core/models/user.model';
 import { Constant } from '../../core/constant/Constant';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,RouterLink],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
