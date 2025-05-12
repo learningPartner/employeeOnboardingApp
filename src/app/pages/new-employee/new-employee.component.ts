@@ -5,6 +5,7 @@ import { MasterService } from '../../core/services/master.service';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationConstant } from '../../core/constant/Constant';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-new-employee',
@@ -17,19 +18,31 @@ export class NewEmployeeComponent {
   deptList$: Observable<IDepartment[]> = new Observable<IDepartment[]>
 
   masterSrc = inject(MasterService);
+  userService = inject(UserService)
   employeeForm!: FormGroup;
   designationList: IDesignation[]= [];
+  selectedRole: string = '';
 
   constructor(private fb: FormBuilder) {
     this.initializeForm()
-    this.deptList$ =  this.masterSrc.getDepartments();
+    this.deptList$ =  this.masterSrc.getDepartments(); 
+    this.userService.loggedInUser$.subscribe(loggedData=>{
+      debugger;
+    })
+    this.userService.loggedDataBehvaiour.subscribe(Res=>{
+      debugger;
+    })
+    this.userService.roleChange$.subscribe((res:any)=>{
+      debugger;
+      this.selectedRole =  res;
+    })
   }
 
+  
   initializeForm() {
     this.employeeForm =  new FormGroup({
       employeeId: new FormControl(0,[Validators.required])
-    })
-
+    }) 
     this.employeeForm = this.fb.group({
       employeeId: [0],
       employeeCode: ['', Validators.required],
@@ -54,12 +67,12 @@ export class NewEmployeeComponent {
       createdAt: [new Date()]
     });
     this.employeeForm.controls['departmentId'].valueChanges.subscribe((deptId:number)=>{
-      debugger;
+      
       this.getDesignationByDept(deptId)
     })
 
     this.employeeForm.controls['maritalStatus'].valueChanges.subscribe((status:string)=>{
-      debugger;
+      
       const spouceControl  = this.employeeForm.get("spouseName") as FormControl;
       if(status == "Married") {
         spouceControl?.addValidators(Validators.required);
@@ -69,7 +82,7 @@ export class NewEmployeeComponent {
       this.updateFormValidity()
     })
     this.employeeForm.controls['verificationDocName'].valueChanges.subscribe((docType:string)=>{
-      debugger;
+      
       if(docType =='Aadhar Card') {
         this.employeeForm.get("verificationDocNumber")?.addValidators(Validators.pattern(ValidationConstant.REG_EX.AADHAR_CARD))
       } else {

@@ -7,7 +7,7 @@ import { ValidationConstant } from '../../core/constant/Constant';
 export class ReadConstPipe implements PipeTransform {
 
   transform(keyName: string): any {
-    debugger;
+    
     const validationConst =  ValidationConstant as any;
     const keyValue  = validationConst[keyName]
     return keyValue;

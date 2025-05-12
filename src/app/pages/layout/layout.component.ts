@@ -19,6 +19,11 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  onRoleChange(Eveent: any) {
+    debugger;
+    const role =  Eveent.target.value;
+    this.userServ.roleChange$.next(role);
+  }
   logOff() {
     localStorage.removeItem(Constant.LOCAL_STORAGE_KEY)
     this.userServ.loggedUser =  undefined ;

@@ -21,20 +21,21 @@ export class LoginComponent {
   router = inject(Router)
 
   onLogin() {
-    debugger;
-    const login = {
-      "emailId": "test445@gmial.com",
-      "password": "445566"
-    }
-    this.userService.loginJwtUser(login).subscribe((result:any)=>{
-      debugger;
-      localStorage.setItem('token',result.data.token)
+    
+    
+    this.userService.loginUser(this.loginObj).subscribe((result:any)=>{
+      
+
+      this.userService.loggedInUser$.next(result);
+      this.userService.loggedDataBehvaiour.next(result);
+
+      //localStorage.setItem('token',result.data.token);
       localStorage.setItem(Constant.LOCAL_STORAGE_KEY,JSON.stringify(result))
       this.userService.setLoggedUser();
       ///alert("Login Success")
       this.router.navigateByUrl("/dashboard")
     },error=>{
-      debugger;
+      
       alert(error.error.message)
     })
   }

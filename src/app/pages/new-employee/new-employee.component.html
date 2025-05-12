@@ -1,252 +1,266 @@
 <div class="container py-4">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="card shadow-lg border-0 rounded-lg">
-          <div class="card-header bg-primary text-white">
-            <h3 class="text-center font-weight-light my-2">
-              <i class="fa fa-user-plus me-2"></i>Employee Registration
-            </h3>
-          </div>
-          <div class="card-body">
-            <form id="employeeForm" [formGroup]="employeeForm" enctype="multipart/form-data">
-              
-              <!-- Personal Information Section -->
-              <div class="card mb-4">
-                <div class="card-header bg-light">
-                  <h5 class="mb-0"><i class="fa fa-id-card me-2"></i>Personal Information</h5>
-                </div>
-                <div class="card-body">
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input class="form-control" id="fullName" name="fullName" type="text" placeholder="Full Name" required />
-                        <label for="fullName">Full Name</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" required />
-                        <label for="email">Email address</label>
-                      </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-primary text-white">
+          <h3 class="text-center font-weight-light my-2">
+            <i class="fa fa-user-plus me-2"></i>Employee Registration
+          </h3>
+        </div>
+        <div class="card-body">
+          <form id="employeeForm" [formGroup]="employeeForm" enctype="multipart/form-data">
+
+            <!-- Personal Information Section -->
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fa fa-id-card me-2"></i>Personal Information</h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" [disabled]="selectedRole == 'Guest'" id="fullName" name="fullName"
+                        type="text" placeholder="Full Name" required />
+                      <label for="fullName">Full Name</label>
                     </div>
                   </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input class="form-control" id="mobile" name="mobile" type="tel" placeholder="Mobile Number" required />
-                        <label for="mobile">Mobile Number</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-venus-mars"></i></span>
-                        <select class="form-select" id="gender" name="gender" required>
-                          <option value="" selected disabled>Select Gender</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
+                  @if (selectedRole !== 'Guest') {
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com"
+                        required />
+                      <label for="email">Email address</label>
                     </div>
                   </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
-                        <input type="text" class="form-control datepicker" id="dob" name="dob" placeholder="Date of Birth" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-ring"></i></span>
-                        <select formControlName="maritalStatus" class="form-select" id="maritalStatus" name="maritalStatus" required>
-                          <option value="" selected disabled>Select Marital Status</option>
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                          <option value="Divorced">Divorced</option>
-                          <option value="Widowed">Widowed</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  @if (getStatus  =='Married') {
-                    <div class="row" id="spouseNameRow">
-                      <div class="col-md-6">
-                        <div class="form-floating mb-3">
-                          <input formControlName="spouseName" class="form-control" id="spouseName" name="spouseName" type="text" placeholder="Spouse Name" />
-                          <label for="spouseName">Spouse Name</label>
-                        </div>
-                      </div>
-                    </div>
                   }
-                 
+
                 </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" id="mobile" name="mobile" type="tel" placeholder="Mobile Number"
+                        required />
+                      <label for="mobile">Mobile Number</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-venus-mars"></i></span>
+                      <select class="form-select" id="gender" name="gender" required>
+                        <option value="" selected disabled>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
+                      <input type="text" class="form-control datepicker" id="dob" name="dob" placeholder="Date of Birth"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-ring"></i></span>
+                      <select formControlName="maritalStatus" class="form-select" id="maritalStatus"
+                        name="maritalStatus" required>
+                        <option value="" selected disabled>Select Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                @if (getStatus =='Married') {
+                <div class="row" id="spouseNameRow">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input formControlName="spouseName" class="form-control" id="spouseName" name="spouseName"
+                        type="text" placeholder="Spouse Name" />
+                      <label for="spouseName">Spouse Name</label>
+                    </div>
+                  </div>
+                </div>
+                }
+
               </div>
-              
-              <!-- Professional Details Section -->
-              <div class="card mb-4">
-                <div class="card-header bg-light">
-                  <h5 class="mb-0"><i class="fa fa-briefcase me-2"></i>Professional Details</h5>
-                </div>
-                <div class="card-body">
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input class="form-control" id="employeeCode" name="employeeCode" type="text" placeholder="Employee Code" required />
-                        <label for="employeeCode">Employee Code</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-calendar-plus"></i></span>
-                        <input type="text" class="form-control datepicker" id="joiningDate" name="joiningDate" placeholder="Joining Date" required>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-building"></i></span>
-                        <select formControlName="departmentId" class="form-select" id="departmentId" name="departmentId" required>
-                          <option value="" selected disabled>Select Department</option>
-                          @for (item of deptList$ |async; track $index) {
-                            <option [value]="item.departmentId"> {{item.name}}</option>
-                          } 
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
-                        <select class="form-select" id="designationId" name="designationId" required>
-                          <option value="" selected disabled>Select Designation</option>
-                          @for (item of designationList; track $index) {
-                            <option [value]="item.designationId"> {{item.name}}</option>
-                          } 
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-md-12">
-                      <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="isFresher" name="isFresher">
-                        <label class="form-check-label" for="isFresher">Is Fresher</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Address & Documents Section -->
-              <div class="card mb-4">
-                <div class="card-header bg-light">
-                  <h5 class="mb-0"><i class="fa fa-map-marker-alt me-2"></i>Address & Documents</h5>
-                </div>
-                <div class="card-body">
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-globe"></i></span>
-                        <select class="form-select" id="stateName" name="stateName" required>
-                          <option value="" selected disabled>Select State</option>
-                          <!-- Options will be loaded dynamically -->
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-city"></i></span>
-                        <select class="form-select" id="cityName" name="cityName" required>
-                          <option value="" selected disabled>Select City</option>
-                          <!-- Options will be loaded dynamically -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select formControlName="verificationDocName" class="form-select" id="departmentId" name="departmentId" required>
-                          <option value="" selected disabled>Select Identity</option>
-                          <option value="Aadhar Card" >Aadhar Card</option>
-                          <option value="Pan Card"  >Pan Card</option>
-                         
-                        </select>
-                        
-                        <label for="verificationDocName">Verification Document Name</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input class="form-control" formControlName="verificationDocNumber" id="verificationDocNumber" name="verificationDocNumber" type="text" placeholder="Verification Document Number" required />
-                        <label for="verificationDocNumber">Verification Document Number</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Profile Details Section -->
-              <div class="card mb-4">
-                <div class="card-header bg-light">
-                  <h5 class="mb-0"><i class="fa fa-user-circle me-2"></i>Profile Details</h5>
-                </div>
-                <div class="card-body">
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="profilePhotoUrl" class="form-label">Profile Photo</label>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa fa-image"></i></span>
-                        <input type="file" class="form-control" id="profilePhotoUrl" name="profilePhotoUrl" accept="image/*">
-                      </div>
-                      <div id="imagePreview" class="mt-2 text-center" style="display: none;">
-                        <img id="preview" src="#" alt="Profile Preview" class="img-thumbnail" style="max-height: 200px;">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select class="form-select" id="status" name="status" required>
-                          <option value="" selected disabled>Select Status</option>
-                          <option value="Active">Active</option>
-                          <option value="Inactive">Inactive</option>
-                          <option value="Probation">Probation</option>
-                        </select>
-                        <label for="status">Status</label>
-                      </div>
-                      <div class="form-floating">
-                        <textarea class="form-control" placeholder="Profile Overview" id="profileOverview" name="profileOverview" style="height: 120px"></textarea>
-                        <label for="profileOverview">Profile Overview</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Form Actions -->
-              <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                <button type="button" class="btn btn-secondary" id="resetBtn">
-                  <i class="fa fa-undo me-1"></i> Reset
-                </button>
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                  <i class="fa fa-save me-1"></i> Submit
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="card-footer text-center py-3">
-            <div class="small">
-              <i class="fa fa-info-circle me-1"></i> Fill all required fields marked with *
             </div>
+
+            <!-- Professional Details Section -->
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fa fa-briefcase me-2"></i>Professional Details</h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" id="employeeCode" name="employeeCode" type="text"
+                        placeholder="Employee Code" required />
+                      <label for="employeeCode">Employee Code</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-calendar-plus"></i></span>
+                      <input type="text" class="form-control datepicker" id="joiningDate" name="joiningDate"
+                        placeholder="Joining Date" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-building"></i></span>
+                      <select formControlName="departmentId" class="form-select" id="departmentId" name="departmentId"
+                        required>
+                        <option value="" selected disabled>Select Department</option>
+                        @for (item of deptList$ |async; track $index) {
+                        <option [value]="item.departmentId"> {{item.name}}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-user-tie"></i></span>
+                      <select class="form-select" id="designationId" name="designationId" required>
+                        <option value="" selected disabled>Select Designation</option>
+                        @for (item of designationList; track $index) {
+                        <option [value]="item.designationId"> {{item.name}}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-12">
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="isFresher" name="isFresher">
+                      <label class="form-check-label" for="isFresher">Is Fresher</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address & Documents Section -->
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fa fa-map-marker-alt me-2"></i>Address & Documents</h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                      <select class="form-select" id="stateName" name="stateName" required>
+                        <option value="" selected disabled>Select State</option>
+                        <!-- Options will be loaded dynamically -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-city"></i></span>
+                      <select class="form-select" id="cityName" name="cityName" required>
+                        <option value="" selected disabled>Select City</option>
+                        <!-- Options will be loaded dynamically -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <select formControlName="verificationDocName" class="form-select" id="departmentId"
+                        name="departmentId" required>
+                        <option value="" selected disabled>Select Identity</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="Pan Card">Pan Card</option>
+
+                      </select>
+
+                      <label for="verificationDocName">Verification Document Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" formControlName="verificationDocNumber" id="verificationDocNumber"
+                        name="verificationDocNumber" type="text" placeholder="Verification Document Number" required />
+                      <label for="verificationDocNumber">Verification Document Number</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Details Section -->
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fa fa-user-circle me-2"></i>Profile Details</h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="profilePhotoUrl" class="form-label">Profile Photo</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="fa fa-image"></i></span>
+                      <input type="file" class="form-control" id="profilePhotoUrl" name="profilePhotoUrl"
+                        accept="image/*">
+                    </div>
+                    <div id="imagePreview" class="mt-2 text-center" style="display: none;">
+                      <img id="preview" src="#" alt="Profile Preview" class="img-thumbnail" style="max-height: 200px;">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="status" name="status" required>
+                        <option value="" selected disabled>Select Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Probation">Probation</option>
+                      </select>
+                      <label for="status">Status</label>
+                    </div>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="Profile Overview" id="profileOverview"
+                        name="profileOverview" style="height: 120px"></textarea>
+                      <label for="profileOverview">Profile Overview</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+              <button type="button" class="btn btn-secondary" id="resetBtn">
+                <i class="fa fa-undo me-1"></i> Reset
+              </button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">
+                <i class="fa fa-save me-1"></i> Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center py-3">
+          <div class="small">
+            <i class="fa fa-info-circle me-1"></i> Fill all required fields marked with *
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-   
+</div>

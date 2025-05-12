@@ -4,11 +4,11 @@ import { catchError, map, throwError } from 'rxjs';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     map((res:any)=> {
-      debugger;
+      
       return res;
     }),
     catchError((error) => {
-      debugger;
+      
       let message = 'An unknown error occurred.';
 
       if (error.status === 0) {

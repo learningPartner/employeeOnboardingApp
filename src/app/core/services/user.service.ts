@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser, LoginModel } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { APIMethodConstant, Constant } from '../constant/Constant';
 import { environment } from '../../../environments/environment';
 
@@ -12,9 +12,18 @@ export class UserService {
 
   loggedUser!: any;
   apiUrl: string = environment.API_URL;
+
+
+  loggedInUser$ : Subject<any> = new Subject<any>;
+
+  loggedDataBehvaiour : BehaviorSubject< any> = new BehaviorSubject<any>({});
+
+  roleChange$ : Subject<any> = new Subject<any>;
+
+
   
   constructor(private http: HttpClient) {
-    debugger; 
+     
     this.setLoggedUser();
   }
 
@@ -26,12 +35,12 @@ export class UserService {
   }
 
   loginUser(loginObj: LoginModel): Observable<IUser> {
-    debugger;
+    
     return this.http.post<IUser>(`${this.apiUrl}${APIMethodConstant.EMPLOYEE.LOGIN}`, loginObj);
   }
 
   loginJwtUser(loginObj: any): Observable<IUser> {
-    debugger;
+    
     return this.http.post<IUser>(`https://api.freeprojectapi.com/api/UserApp/login`, loginObj);
   }
 }

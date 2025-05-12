@@ -17,6 +17,11 @@
           </li>
         </ul>
         <form class="d-flex">
+          <select (change)="onRoleChange($event)">
+             <option value="Guest">Guest</option>
+             <option value="SuperAdmin">SuperAdmin</option>
+              <option value="Employee">Employee</option>
+          </select>
            <span class="text-white">{{userServ.loggedUser?.email}}</span>
           <button class="btn btn-primary" type="button" (click)="logOff()">LogOff</button>
         </form>

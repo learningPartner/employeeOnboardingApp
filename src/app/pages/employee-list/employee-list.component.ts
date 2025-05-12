@@ -16,14 +16,10 @@ export class EmployeeListComponent implements OnInit {
     this.getUsers()
   }
   getUsers() {
-    // const token = localStorage.getItem('token')
-    // const header =  new HttpHeaders({
-    //   'Authorization':  `Bearer ${token}`
-    // })
     this.http.get("https://api.freeprojectapi.com/api/UserApp/GetAllUsers").subscribe( result=>{
-      debugger;
+      
     },error=>{
-      debugger;
+      
     })
   }
 }
