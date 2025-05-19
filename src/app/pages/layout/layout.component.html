@@ -6,21 +6,29 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
+           <li class="nav-item" >
+            <a class="nav-link active" routerLink="dashboard">Dashboard</a>
+          </li>
           <li class="nav-item" >
             <a class="nav-link active" routerLink="new-employee">New Employee</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" href="javascript:void(0)">Link</a>
+            <a class="nav-link active" routerLink="employee-list"> Employee List</a>
           </li>
-          <li class="nav-item" >
-            <a class="nav-link" href="javascript:void(0)">Link</a>
+            <li class="nav-item" >
+            <a class="nav-link active" routerLink="experience"> Experience</a>
           </li>
+            <li class="nav-item" >
+            <a class="nav-link active" routerLink="bank-details"> Bank-Details</a>
+          </li>
+            <li class="nav-item" >
+            <a class="nav-link active" routerLink="master"> Master Data</a>
+          </li> 
         </ul>
         <form class="d-flex">
-          <select (change)="onRoleChange($event)">
-             <option value="Guest">Guest</option>
-             <option value="SuperAdmin">SuperAdmin</option>
-              <option value="Employee">Employee</option>
+          <select class="form-select" (change)="onRoleChange($event)">
+             <option value="HR">HR</option>
+             <option value="Employee">SuperAdmin</option> 
           </select>
            <span class="text-white">{{userServ.loggedUser?.email}}</span>
           <button class="btn btn-primary" type="button" (click)="logOff()">LogOff</button>

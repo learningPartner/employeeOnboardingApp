@@ -5,6 +5,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
 import { authGuard } from './core/guard/auth.guard';
 import { NewEmployeeComponent } from './pages/new-employee/new-employee.component';
+import { MasterComponent } from './pages/master/master.component';
+import { ExperienceComponent } from './pages/experience/experience.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +35,19 @@ export const routes: Routes = [
             {
                 path:'new-employee',
                 component: NewEmployeeComponent
+            },
+            {
+                path:'master',
+                component: MasterComponent
+            } ,
+            {
+                path:'experience',
+                component: ExperienceComponent
+            }
+            ,
+            {
+                path:'bank-details',
+                component: BankDetailsComponent
             }
         ]
     }

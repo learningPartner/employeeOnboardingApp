@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      Bank Details Form
+    </div>
+    <div class="card-body">
+      <form >
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Bank Name</label>
+            <input type="text" class="form-control" name="bankName" required   />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Account Number</label>
+            <input type="text" class="form-control" name="accountNumber" required  />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">IFSC Code</label>
+            <input type="text" class="form-control" name="ifscCode" required   />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Branch Name</label>
+            <input type="text" class="form-control" name="branchName" required  />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Account Type</label>
+            <select class="form-select" name="accountType" required    >
+              <option value="" disabled selected>Select Account Type</option>
+              <option value="Saving">Saving</option>
+              <option value="Current">Current</option>
+              <option value="Salary">Salary</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success"  >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
