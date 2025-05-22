@@ -5,22 +5,39 @@
       <div class="card h-100">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
           <span>Departments</span>
-          <button class="btn btn-sm btn-light" (click)="openAddDepartment()">+ Add</button>
+          <button class="btn btn-sm btn-light" (click)="toggleDeptFrom()">+ Add</button>
         </div>
         <div class="card-body p-2">
+          @if (isNewDept()) {
+          <form class="mb-3">
+            <div class="row g-3">
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="name" placeholder="Enter Department name" required
+                  [(ngModel)]="department.name" />
+              </div>
+              <div class="col-md-4">
+                <button type="button" (click)="onSaveUpdateDept()" class="btn btn-success ">
+                    {{department.departmentId === 0? 'Add': 'Update'}}
+                </button> 
+              </div>
+            </div>
+          </form>
+          }
+
           <ul class="list-group">
             <!-- Loop through departments -->
-            <li
-              *ngFor="let dept of departmentList"
+            <li *ngFor="let dept of departmentList"
               class="list-group-item d-flex justify-content-between align-items-center"
-              [class.active]="selectedDepartment?.departmentId === dept.departmentId"
-               
-              style="cursor: pointer;"
-            >
-              {{ dept.name }}
+               style="cursor: pointer;" title="{{dept.name}}"
+               [class.bg-success]="selectedDepartment?.departmentId == dept.departmentId" 
+               (click)="selectDepartment(dept)"
+               >
+              {{ dept.name |slice:0:20  }}
               <div>
-                <button class="btn btn-sm btn-warning me-1" (click)="editDepartment(dept); $event.stopPropagation();">Edit</button>
-                <button class="btn btn-sm btn-danger" (click)="deleteDepartment(dept.departmentId); $event.stopPropagation();">Delete</button>
+                <button class="btn btn-sm btn-warning me-1"
+                  (click)="editDepartment(dept);">Edit</button>
+                <button class="btn btn-sm btn-danger"
+                  (click)="deleteDepartment(dept.departmentId); $event.stopPropagation();">Delete</button>
               </div>
             </li>
             <li *ngIf="departmentList.length === 0" class="list-group-item text-muted">No departments added yet</li>
@@ -30,28 +47,22 @@
     </div>
 
     <!-- Right Panel: Designations -->
-    <div class="col-md-8"  >
+    <div class="col-md-8">
       <div class="card h-100">
         <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-          <span>Designations in "{{ selectedDepartment.name }}"</span>
+          <span>Designations in "{{ selectedDepartment?.name }}"</span>
           <button class="btn btn-sm btn-light" (click)="openAddDesignation()">+ Add</button>
         </div>
         <div class="card-body">
           <form (ngSubmit)="saveDesignation()" #designationForm="ngForm" class="mb-3">
             <div class="row g-3">
               <div class="col-md-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="designationName"
-                  placeholder="Enter designation name"
-                  required
-                  [(ngModel)]="designation.name"
-                />
+                <input type="text" class="form-control" name="designationName" placeholder="Enter designation name"
+                  required [(ngModel)]="designation.name" />
               </div>
               <div class="col-md-4">
                 <button type="submit" class="btn btn-success ">
-                  Add 
+                  Add
                 </button>
               </div>
             </div>
