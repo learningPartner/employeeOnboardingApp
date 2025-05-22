@@ -115,7 +115,7 @@ export class MasterComponent implements OnInit {
 
     if (this.designation.designationId === 0) {
       // Add new
-      debugger;
+      
      this.http.post("https://motopartz.gerasim.in/api/Master/designations",this.designation).subscribe({
         next:() => {
           alert("Save Success");

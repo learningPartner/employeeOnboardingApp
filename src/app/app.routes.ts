@@ -8,6 +8,7 @@ import { NewEmployeeComponent } from './pages/new-employee/new-employee.componen
 import { MasterComponent } from './pages/master/master.component';
 import { ExperienceComponent } from './pages/experience/experience.component';
 import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
+import { roleCheckGuard } from './core/guard/role-check.guard';
 
 export const routes: Routes = [
     {
@@ -22,11 +23,11 @@ export const routes: Routes = [
     {
         path:'',
         component: LayoutComponent,
+        canActivate: [authGuard,roleCheckGuard],
         children:[
             {
                 path:'dashboard',
-                component:DashboardComponent,
-                canActivate: [authGuard]
+                component:DashboardComponent 
             },
             {
                 path:'employee-list',

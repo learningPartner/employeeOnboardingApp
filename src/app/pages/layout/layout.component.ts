@@ -14,13 +14,14 @@ export class LayoutComponent implements OnInit {
 
   router = inject(Router);
   userServ= inject(UserService)
+  loggedRole: string = '';
    
 
   ngOnInit(): void {
     
   }
   onRoleChange(Eveent: any) {
-    debugger;
+    
     const role =  Eveent.target.value;
     this.userServ.roleChange$.next(role);
   }

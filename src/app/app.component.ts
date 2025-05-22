@@ -15,19 +15,19 @@ export class AppComponent implements OnInit{
 
   constructor() {
     this.userService.loggedInUser$.subscribe(Res=>{
-       debugger;
+       
     })
     this.userService.loggedDataBehvaiour.subscribe(Res=>{
-      debugger;
+      
     })
   }
 
   ngOnInit(): void {
     this.userService.loggedInUser$.subscribe(Result=>{
-       debugger;
+       
     })
     this.userService.loggedDataBehvaiour.subscribe(Res=>{
-      debugger;
+      
     })
 
     // setTimeout(() => {
