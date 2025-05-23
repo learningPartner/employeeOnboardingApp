@@ -6,10 +6,12 @@ import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationConstant } from '../../core/constant/Constant';
 import { UserService } from '../../core/services/user.service';
+import { HttpClient } from '@angular/common/http';
+import { DisableForEmpDirective } from '../../shared/directives/disable-for-emp.directive';
 
 @Component({
   selector: 'app-new-employee',
-  imports: [AsyncPipe,ReactiveFormsModule],
+  imports: [AsyncPipe,ReactiveFormsModule,DisableForEmpDirective],
   templateUrl: './new-employee.component.html',
   styleUrl: './new-employee.component.css'
 })
@@ -18,7 +20,8 @@ export class NewEmployeeComponent {
   deptList$: Observable<IDepartment[]> = new Observable<IDepartment[]>
 
   masterSrc = inject(MasterService);
-  userService = inject(UserService)
+  userService = inject(UserService);
+  http= inject(HttpClient);
   employeeForm!: FormGroup;
   designationList: IDesignation[]= [];
   selectedRole: string = '';
@@ -27,16 +30,48 @@ export class NewEmployeeComponent {
     this.initializeForm()
     this.deptList$ =  this.masterSrc.getDepartments(); 
     this.userService.loggedInUser$.subscribe(loggedData=>{
-      debugger;
+      
     })
     this.userService.loggedDataBehvaiour.subscribe(Res=>{
-      debugger;
+      
     })
     this.userService.roleChange$.subscribe((res:any)=>{
-      debugger;
+      
       this.selectedRole =  res;
     })
   }
+
+  fileName: string = ''
+  onFileSelect(file: any) {
+    
+
+    const formData = new FormData();
+    formData.append('file',file.target.files[0]);
+    
+    this.http.post("https://motopartz.gerasim.in/api/FileUpload/upload",formData).subscribe((res:any)=>{
+      
+      this.fileName = res.fileName;
+      this.employeeForm.controls['profilePhotoUrl'].setValue(res.fileName);
+    })
+  }
+
+  // onSubmit() {
+  //   const employeeData = this.employeeForm.value;
+
+  //   const formData = new FormData();
+
+  //   formData.append('employee', new Blob([JSON.stringify(employeeData)], { type: 'application/json' }));
+
+  //   if (this.selectedFile) {
+  //     formData.append('file', this.selectedFile);
+  //   }
+
+  //   this.http.post('https://your-api-url.com/api/employee/save', formData).subscribe({
+  //     next: (res) => console.log('Success', res),
+  //     error: (err) => console.error('Error', err),
+  //   });
+  // }
+
 
   
   initializeForm() {

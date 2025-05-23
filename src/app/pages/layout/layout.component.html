@@ -1,41 +1,50 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">
-           <li class="nav-item" >
-            <a class="nav-link active" routerLink="dashboard">Dashboard</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link active" routerLink="new-employee">New Employee</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link active" routerLink="employee-list"> Employee List</a>
-          </li>
-            <li class="nav-item" >
-            <a class="nav-link active" routerLink="experience"> Experience</a>
-          </li>
-            <li class="nav-item" >
-            <a class="nav-link active" routerLink="bank-details"> Bank-Details</a>
-          </li>
-            <li class="nav-item" >
-            <a class="nav-link active" routerLink="master"> Master Data</a>
-          </li> 
-        </ul>
-        <form class="d-flex">
-          <select class="form-select" (change)="onRoleChange($event)">
-             <option value="HR">HR</option>
-             <option value="Employee">SuperAdmin</option> 
-          </select>
-           <span class="text-white">{{userServ.loggedUser?.email}}</span>
-          <button class="btn btn-primary" type="button" (click)="logOff()">LogOff</button>
-        </form>
-      </div>
-    </div>
-  </nav>
   <div class="container-fluid">
-    <router-outlet></router-outlet>
+    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        @if (userServ.loggedRole == 'HR') {
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="dashboard">Dashboard</a>
+        </li>
+        }
+
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="new-employee">New Employee</a>
+        </li>
+        @if (userServ.loggedRole == 'HR') {
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="employee-list"> Employee List</a>
+        </li>
+        }
+
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="experience"> Experience</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="bank-details"> Bank-Details</a>
+        </li>
+        @if (userServ.loggedRole == 'HR') {
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="master"> Master Data</a>
+        </li>
+        }
+
+      </ul>
+      <form class="d-flex">
+        <select class="form-select" (change)="onRoleChange($event)">
+          <option value="HR">HR</option>
+          <option value="Employee">SuperAdmin</option>
+        </select>
+        <span class="text-white">{{userServ.loggedUser?.email}}</span>
+        <button class="btn btn-primary" type="button" (click)="logOff()">LogOff</button>
+      </form>
+    </div>
   </div>
+</nav>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

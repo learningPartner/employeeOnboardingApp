@@ -7,6 +7,14 @@ export const Constant = {
     }
 }
 
+export const MenuItems = {
+    menuData: [
+        {menuName: 'Dashboad', route: 'dashborad',role: 'HR'},
+        {menuName: 'Dashboad', route: 'dashborad',role: 'HR'},
+        {menuName: 'Dashboad', route: 'dashborad',role: 'Employee'}
+    ]
+}
+
 export const ValidationConstant = { 
     REQUIRED: 'Required',
     MOBILE_MIN_LENGTH: '10 Char Needed',

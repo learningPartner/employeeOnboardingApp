@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 export class UserService {
 
   loggedUser!: any;
+  loggedRole: string ='';
   apiUrl: string = environment.API_URL;
 
 
@@ -25,6 +26,11 @@ export class UserService {
   constructor(private http: HttpClient) {
      
     this.setLoggedUser();
+    const role = localStorage.getItem("empRole")
+    if(role != null) {
+       this.loggedRole  = role;
+    }
+   
   }
 
   setLoggedUser() {

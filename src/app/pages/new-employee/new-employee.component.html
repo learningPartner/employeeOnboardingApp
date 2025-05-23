@@ -19,7 +19,7 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <div class="form-floating mb-3">
-                      <input class="form-control" [disabled]="selectedRole == 'Guest'" id="fullName" name="fullName"
+                      <input  class="form-control" appDisableForEmp id="fullName" name="fullName"
                         type="text" placeholder="Full Name" required />
                       <label for="fullName">Full Name</label>
                     </div>
@@ -27,7 +27,7 @@
                   @if (selectedRole !== 'Guest') {
                   <div class="col-md-6">
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com"
+                      <input class="form-control" id="email" appDisableForEmp name="email" type="email" placeholder="name@example.com"
                         required />
                       <label for="email">Email address</label>
                     </div>
@@ -217,11 +217,11 @@
                     <label for="profilePhotoUrl" class="form-label">Profile Photo</label>
                     <div class="input-group mb-3">
                       <span class="input-group-text"><i class="fa fa-image"></i></span>
-                      <input type="file" class="form-control" id="profilePhotoUrl" name="profilePhotoUrl"
+                      <input type="file" (change)="onFileSelect($event)" class="form-control" id="profilePhotoUrl" name="profilePhotoUrl"
                         accept="image/*">
                     </div>
                     <div id="imagePreview" class="mt-2 text-center" style="display: none;">
-                      <img id="preview" src="#" alt="Profile Preview" class="img-thumbnail" style="max-height: 200px;">
+                      <img id="preview" src="https://motopartz.gerasim.in/UploadedFiles/{{fileName}}" alt="Profile Preview" class="img-thumbnail" style="max-height: 200px;">
                     </div>
                   </div>
                   <div class="col-md-6">

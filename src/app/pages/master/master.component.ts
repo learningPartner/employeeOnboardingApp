@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,11 +9,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './master.component.html',
   styleUrl: './master.component.css'
 })
-export class MasterComponent {
-departmentList = [
-    // Sample data, can be empty initially
-    { departmentId: 1, name: 'HR' },
-    { departmentId: 2, name: 'IT' }
+export class MasterComponent implements OnInit {
+
+
+  isNewDept = signal<boolean>( false);
+
+ 
+  http = inject(HttpClient)
+
+  departmentList:any [] = [ 
   ];
   department = { departmentId: 0, name: '' };
   selectedDepartment: any = null;
@@ -21,10 +26,31 @@ departmentList = [
   designationList: any[] = [];
   designation = { designationId: 0, departmentId: 0, name: '' };
 
+  ngOnInit(): void {
+    this.getDept()
+  }
+
+  getDept() {
+    this.http.get("https://motopartz.gerasim.in/api/Master/departments").subscribe((Res:any)=>{
+      this.departmentList = Res;
+    })
+  }
+
+  getDesignByDept(id: number) {
+    this.http.get("https://motopartz.gerasim.in/api/Master/GetDesignationsByDeptId?id=" +id).subscribe((RES:any)=>{
+      this.designationList =  RES;
+    })
+  }
+
+   toggleDeptFrom() {
+    this.department = { departmentId: 0, name: '' };
+    this.isNewDept.set(!this.isNewDept())
+  }
+  
   // Select a department from the list
   selectDepartment(dept: any) {
     this.selectedDepartment = dept;
-    this.loadDesignationsForDepartment(dept.departmentId);
+    this.getDesignByDept(dept.departmentId);
     this.resetDesignationForm();
   }
 
@@ -33,22 +59,35 @@ departmentList = [
   openAddDepartment() {
     this.department = { departmentId: 0, name: '' };
   }
+  
 
   editDepartment(dept: any) {
     this.department = { ...dept };
+    if(this.department.departmentId != 0 && !this.isNewDept()) {
+       this.isNewDept.set(true)
+    }
+   
   }
 
-  saveDepartment() {
+  onSaveUpdateDept() {
     if (this.department.departmentId === 0) {
       // Add new
-      const newId = this.departmentList.length + 1;
-      this.departmentList.push({ ...this.department, departmentId: newId });
+      this.http.post("https://motopartz.gerasim.in/api/Master/departments",this.department).subscribe({
+        next:() => {
+          alert("Save Success");
+          this.department = {departmentId: 0, name: '' };
+          this.getDept()
+        },
+        error:() => {
+          alert("API Error")
+        }
+      })
     } else {
       // Update existing
-      const index = this.departmentList.findIndex(d => d.departmentId === this.department.departmentId);
-      if (index !== -1) {
-        this.departmentList[index] = { ...this.department };
-      }
+      //const index = this.departmentList.findIndex(d => d.departmentId === this.department.departmentId);
+      // if (index !== -1) {
+      //   this.departmentList[index] = { ...this.department };
+      // }
     }
     this.department = { departmentId: 0, name: '' };
   }
@@ -76,8 +115,17 @@ departmentList = [
 
     if (this.designation.designationId === 0) {
       // Add new
-      const newId = this.designationList.length + 1;
-      this.designationList.push({ ...this.designation, designationId: newId });
+      
+     this.http.post("https://motopartz.gerasim.in/api/Master/designations",this.designation).subscribe({
+        next:() => {
+          alert("Save Success");
+          this.designation = {departmentId: 0, name: '' ,designationId: 0};
+          this.getDesignByDept(this.selectedDepartment.departmentId)
+        },
+        error:() => {
+          alert("API Error")
+        }
+      })
     } else {
       // Update existing
       const index = this.designationList.findIndex(d => d.designationId === this.designation.designationId);
