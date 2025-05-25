@@ -35,10 +35,14 @@
 
       </ul>
       <form class="d-flex">
-        <select class="form-select" (change)="onRoleChange($event)">
+        <!-- <select class="form-select" (change)="onRoleChange($event)">
           <option value="HR">HR</option>
           <option value="Employee">SuperAdmin</option>
-        </select>
+        </select> -->
+        <span class="text-white">{{counter$|async}}</span>
+
+        <button type="button" (click)="decrementCounter()">-</button>
+        <button  type="button"(click)="incrementCounter()">+</button>
         <span class="text-white">{{userServ.loggedUser?.email}}</span>
         <button class="btn btn-primary" type="button" (click)="logOff()">LogOff</button>
       </form>

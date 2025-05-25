@@ -1,9 +1,12 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core'; 
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppStore } from '../../store/counter.reducer';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule,AsyncPipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -16,14 +19,18 @@ export class DashboardComponent implements OnInit {
     last7DaysNewEmployees: 0
   };
 
+  counter : Observable<number> = new Observable<number>;
   profileStats = {
     totalEmployees: 0,
     averageProfileCompletion: 0
   };
+  constructor(private store: Store<AppStore>) {
 
+  }
   recentEmployees: any[] = [];
 
   ngOnInit() {
+    this.counter = this.store.pipe(select('count'))
     // Mock: Replace with API calls
     this.dashboardData = {
       totalEmployees: 19,
