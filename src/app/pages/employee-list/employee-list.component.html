@@ -1,1 +1,67 @@
-<p>employee-list works!</p>
+<div class="list-container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>fullName</th>
+                        <th>email</th>
+                        <th>mobile</th>
+                        <th>gender</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of employeeList; track $index) {
+                    <tr>
+                        <td>{{item.fullName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.mobile}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>
+                            <button type="button"class="btn btn-info" (click)="onEdit(item)">edit</button>
+                            <button type="button" class="btn btn-danger" (click)="onDelete(item.employeeId)">delete</button>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <form [formGroup]="employeeData">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="fullName">fullName</label>
+                        <input type="text" formControlName="fullName" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="fullName">email</label>
+                        <input type="text" formControlName="email" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="fullName">mobile</label>
+                            <input type="text" formControlName="mobile" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="fullName">gender</label>
+                            <input type="text" formControlName="gender" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-12">
+                           
+                            <button class="btn btn-success" *ngIf="employeeData.get('employeeId')?.value == 0"
+                                (click)="saveUser()">Save</button>
+                            <button class="btn btn-warning" *ngIf="employeeData.get('employeeId')?.value != 0"
+                                (click)="updateUser()">Update</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
